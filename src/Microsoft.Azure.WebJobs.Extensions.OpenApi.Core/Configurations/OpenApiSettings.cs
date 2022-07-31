@@ -1,41 +1,38 @@
-using System;
-using System.Collections.Generic;
-
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
-using Microsoft.OpenApi.Models;
-
 namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations
 {
     /// <summary>
-    /// This represents the settings entity for OpenAPI metadata.
+    /// This represents the environment variable settings entity for OpenAPI document.
     /// </summary>
-    [Obsolete("This class is obsolete from 0.5.0-preview. Use OpenApiConfigurationOptions instead", error: true)]
-    public sealed class OpenApiSettings : IOpenApiConfigurationOptions
+    public class OpenApiSettings
     {
-        /// <inheritdoc />
-        public OpenApiInfo Info { get; set; } = new OpenApiInfo()
-        {
-            Version = "1.0.0",
-            Title = "Azure Functions OpenAPI Extension",
-        };
+        /// <summary>
+        /// Gets or sets the value indicating whether to hide the Swagger UI page or not.
+        /// </summary>
+        public virtual bool HideSwaggerUI { get; set; }
 
-        /// <inheritdoc />
-        public List<OpenApiServer> Servers { get; set; } = new List<OpenApiServer>();
+        /// <summary>
+        /// Gets or sets the value indicating whether to hide the document pages or not.
+        /// </summary>
+        public virtual bool HideDocument { get; set; }
 
-        /// <inheritdoc />
-        public OpenApiVersionType OpenApiVersion { get; set; } = OpenApiVersionType.V2;
+        /// <summary>
+        /// Gets or sets the API key to access to OpenAPI document.
+        /// </summary>
+        public virtual string ApiKey { get; set; }
 
-        /// <inheritdoc />
-        public bool IncludeRequestingHostName { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="OpenApiAuthLevelSettings"/> object.
+        /// </summary>
+        public virtual OpenApiAuthLevelSettings AuthLevel { get; set; }
 
-        /// <inheritdoc />
-        public bool ForceHttp { get; set; }
+        /// <summary>
+        /// Gets or sets the backend URL for Azure Functions Proxy.
+        /// </summary>
+        public virtual string BackendProxyUrl { get; set; }
 
-        /// <inheritdoc />
-        public bool ForceHttps { get; set; }
-
-        /// <inheritdoc />
-        public List<IDocumentFilter> DocumentFilters { get; set; } = new List<IDocumentFilter>();
+        /// <summary>
+        /// Gets or sets the comma delimited host names.
+        /// </summary>
+        public virtual string HostNames { get; set; }
     }
 }

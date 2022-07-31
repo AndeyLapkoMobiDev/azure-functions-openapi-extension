@@ -1,8 +1,11 @@
+using System;
+
 namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Configurations
 {
     /// <summary>
     /// This represents the environment variable settings entity for OpenAPI document.
     /// </summary>
+    [Obsolete("It's deprecated and will be removed from v2.0.0. Use Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Configurations.OpenApiSettings instead.")]
     public class OpenApiSettings
     {
         /// <summary>
