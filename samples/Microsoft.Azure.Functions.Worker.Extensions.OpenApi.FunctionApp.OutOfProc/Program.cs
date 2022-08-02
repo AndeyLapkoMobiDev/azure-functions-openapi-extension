@@ -11,8 +11,8 @@ namespace Microsoft.Azure.Functions.Worker.Extensions.OpenApi.FunctionApp.OutOfP
         public static void Main()
         {
             var host = new HostBuilder()
-                //.ConfigureFunctionsWorkerDefaults(worker => worker.UseNewtonsoftJson())
-                //.ConfigureOpenApi()
+                // .ConfigureFunctionsWorkerDefaults(worker => worker.UseNewtonsoftJson())
+                .ConfigureOpenApi()
                 .ConfigureServices(services => services.AddSingleton<Fixture>())
                 .Build();
 

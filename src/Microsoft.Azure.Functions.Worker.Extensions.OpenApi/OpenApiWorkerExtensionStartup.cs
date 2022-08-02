@@ -3,6 +3,7 @@ using Azure.Core.Serialization;
 using Microsoft.Azure.Functions.Worker.Core;
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi;
 using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
@@ -23,9 +24,19 @@ namespace Microsoft.Azure.Functions.Worker.Extensions.OpenApi
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.NullValueHandling = NullValueHandling.Ignore;
 
-            applicationBuilder.UseNewtonsoftJson(settings)
-                              //.ConfigureAppSettings()
-                              .ConfigureOpenApi();
+            // applicationBuilder.Services.Configure<WorkerOptions>(workerOptions =>
+            // {
+            //     workerOptions.Serializer = new NewtonsoftJsonObjectSerializer(settings);
+            // });
+            applicationBuilder.Services.PostConfigure<WorkerOptions>(workerOptions =>
+            {
+                workerOptions.Serializer = new NewtonsoftJsonObjectSerializer(settings);
+            });
+
+            // applicationBuilder.UseNewtonsoftJson(settings)
+            //                   //.ConfigureAppSettings()
+            //                   //.ConfigureOpenApi()
+            //                   ;
         }
     }
 }
